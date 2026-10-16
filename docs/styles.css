@@ -47,13 +47,26 @@ h1 {
     margin-bottom: 30px;
 }
 
+h2 {
+    margin-top: 0;
+}
+
+p {
+    font-size: 18px;
+    line-height: 1.7;
+    margin-bottom: 20px;
+}
+
 .section-heading {
     margin-top: 0;
     padding-top: 50px;
     margin-bottom: 20px;
 }
 
-/* MEDIA PAGE */
+
+/* ------------------------------ */
+/* MEDIA PAGE                     */
+/* ------------------------------ */
 
 .archive-selector {
     display: flex;
@@ -76,25 +89,76 @@ h1 {
     padding: 10px 14px;
     font-size: 16px;
     border: 1px solid #cccccc;
-    border-radius: 6px;
+    border-radius: 0;
     background-color: white;
 }
 
 
-.day-entry {
-    margin-bottom: 70px;
+/* ------------------------------ */
+/* FILTER SECTION                 */
+/* ------------------------------ */
+
+.filter-section {
+    border: 1px solid #dddddd;
+    padding: 25px;
+    margin-bottom: 60px;
 }
 
-.day-entry h2 {
+.filter-section h2 {
+    margin-top: 0;
+    margin-bottom: 20px;
+}
+
+.filter-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+}
+
+.filter-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.filter-group h3 {
+    font-size: 15px;
+    margin-top: 0;
+    margin-bottom: 8px;
+}
+
+.filter-group select {
+    padding: 10px;
+    border: 1px solid #cccccc;
+    border-radius: 0;
+    background-color: white;
+    font-size: 15px;
+}
+
+
+/* ------------------------------ */
+/* DAY ENTRIES                    */
+/* ------------------------------ */
+
+.day-entry {
+    margin-bottom: 80px;
+}
+
+.day-entry > h2 {
     font-size: 28px;
     margin-bottom: 25px;
 }
 
 
+/* ------------------------------ */
+/* MEDIA ENTRY                    */
+/* ------------------------------ */
+
 .media-entry {
     border: 1px solid #dddddd;
-    border-radius: 10px;
+    border-radius: 0;
     padding: 25px;
+    margin-bottom: 30px;
+    background-color: #ffffff;
 }
 
 .media-entry h3 {
@@ -102,28 +166,30 @@ h1 {
     margin-bottom: 20px;
 }
 
-
 .media-content {
     display: flex;
     gap: 25px;
 }
 
 
-/* Image box */
+/* ------------------------------ */
+/* IMAGE BOX                      */
+/* ------------------------------ */
 
 .media-image {
     width: 180px;
     min-width: 180px;
     height: 250px;
 
-    border: 2px dashed #cccccc;
-    border-radius: 8px;
+    border: 1px solid #cccccc;
+    border-radius: 0;
 
     display: flex;
     align-items: center;
     justify-content: center;
 
     overflow: hidden;
+    background-color: #f8f8f8;
 }
 
 .media-image img {
@@ -133,7 +199,9 @@ h1 {
 }
 
 
-/* Text section */
+/* ------------------------------ */
+/* MEDIA DESCRIPTION              */
+/* ------------------------------ */
 
 .media-description {
     flex: 1;
@@ -150,26 +218,78 @@ h1 {
 }
 
 
-/* Tags */
+/* ------------------------------ */
+/* STAR RATING                    */
+/* ------------------------------ */
 
-.tags {
+.rating-section {
+    margin-top: 20px;
+    margin-bottom: 25px;
+    font-size: 18px;
+}
+
+.rating {
+    margin-left: 8px;
+    font-size: 24px;
+    letter-spacing: 2px;
+}
+
+
+/* ------------------------------ */
+/* TAGS                           */
+/* ------------------------------ */
+
+.tag-categories {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 20px;
+}
+
+.tag-category {
     display: flex;
     flex-wrap: wrap;
+    align-items: center;
     gap: 8px;
-    margin-top: 20px;
+}
+
+.tag-label {
+    width: 60px;
+    font-size: 13px;
+    font-weight: bold;
 }
 
 .tag {
     background-color: #eeeeee;
-    padding: 6px 12px;
-    border-radius: 20px;
-    font-size: 14px;
+    padding: 5px 10px;
+    border: 1px solid #dddddd;
+    border-radius: 0;
+    font-size: 13px;
 }
 
 
-/* Mobile layout */
+/* ------------------------------ */
+/* MOBILE                         */
+/* ------------------------------ */
 
-@media (max-width: 600px) {
+@media (max-width: 700px) {
+
+    nav {
+        gap: 20px;
+        flex-wrap: wrap;
+    }
+
+    main {
+        margin-top: 40px;
+    }
+
+    .archive-selector {
+        flex-wrap: wrap;
+    }
+
+    .filter-grid {
+        grid-template-columns: 1fr 1fr;
+    }
 
     .media-content {
         flex-direction: column;
@@ -177,12 +297,26 @@ h1 {
 
     .media-image {
         width: 100%;
-        height: 300px;
+        height: 350px;
     }
 }
 
-p {
-    font-size: 18px;
-    line-height: 1.7;
-    margin-bottom: 20px;
+
+@media (max-width: 450px) {
+
+    .filter-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .archive-selector {
+        flex-direction: column;
+    }
+
+    .archive-selector div {
+        width: 100%;
+    }
+
+    .archive-selector select {
+        width: 100%;
+    }
 }

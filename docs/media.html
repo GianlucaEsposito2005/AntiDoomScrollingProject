@@ -100,7 +100,7 @@
             <div class="filter-grid">
 
 
-                <!-- TYPE -->
+                <!-- TYPE OF MEDIA -->
 
                 <div class="filter-group">
 
@@ -110,9 +110,7 @@
 
                     <select id="type-filter">
 
-                        <option value="all">
-                            All
-                        </option>
+                        <option value="all">All</option>
 
                         <option value="movie">
                             Movie
@@ -144,6 +142,10 @@
 
                         <option value="video">
                             Video
+                        </option>
+
+                        <option value="sports">
+                            Sports
                         </option>
 
                     </select>
@@ -240,15 +242,15 @@
 
 
 
-                <!-- OTHER -->
+                <!-- GENRE -->
 
                 <div class="filter-group">
 
-                    <label for="other-filter">
-                        Other
+                    <label for="genre-filter">
+                        Genre
                     </label>
 
-                    <select id="other-filter">
+                    <select id="genre-filter">
 
                         <option value="all">
                             All
@@ -282,6 +284,26 @@
                             Superhero
                         </option>
 
+                        <option value="baseball">
+                            Baseball
+                        </option>
+
+                        <option value="basketball">
+                            Basketball
+                        </option>
+
+                        <option value="football">
+                            Football
+                        </option>
+
+                        <option value="american-football">
+                            American Football
+                        </option>
+
+                        <option value="hockey">
+                            Hockey
+                        </option>
+
                     </select>
 
                 </div>
@@ -308,14 +330,12 @@
 
 
 
-            <!-- MEDIA ITEM -->
-
             <article
                 class="media-entry"
                 data-type="movie"
                 data-completion="completed"
                 data-release="2022"
-                data-other="superhero drama"
+                data-genre="superhero drama"
             >
 
                 <h3>Media Consumed</h3>
@@ -347,8 +367,8 @@
 
                         <p>
                             Write what you thought about the movie,
-                            book, game, album, comic, or other piece
-                            of media here.
+                            book, game, album, comic, sport, or other
+                            piece of media here.
                         </p>
 
 
@@ -434,7 +454,7 @@
                             <div class="tag-category">
 
                                 <span class="tag-label">
-                                    Other
+                                    Genre
                                 </span>
 
                                 <div class="tag-list">
@@ -481,10 +501,10 @@
 
             <article
                 class="media-entry"
-                data-type="book"
-                data-completion="not-completed"
-                data-release="2025"
-                data-other="fantasy"
+                data-type="sports"
+                data-completion="completed"
+                data-release="2026"
+                data-genre="baseball"
             >
 
                 <h3>Media Consumed</h3>
@@ -510,22 +530,34 @@
                     <div class="media-description">
 
                         <h4>
-                            Title of Media
+                            MLB NLCS Game 4 2026 - Milwaukee Brewers Vs. Los Angeles Dodgers
                         </h4>
 
 
                         <p>
-                            Write your description here.
+                            Write what you thought about the game here.
                         </p>
 
 
 
-                        <!--
-                        No rating is shown because this
-                        media is not completed.
-                        -->
+                        <!-- RATING -->
+                        <!-- Add your star rating here when you decide on one -->
+
+                        <div class="rating-section">
+
+                            <span class="rating-label">
+                                Rating:
+                            </span>
+
+                            <span class="rating">
+                                Not Rated
+                            </span>
+
+                        </div>
 
 
+
+                        <!-- TAGS -->
 
                         <div class="tag-categories">
 
@@ -539,7 +571,7 @@
                                 <div class="tag-list">
 
                                     <span class="tag">
-                                        Book
+                                        Sports
                                     </span>
 
                                 </div>
@@ -557,7 +589,7 @@
                                 <div class="tag-list">
 
                                     <span class="tag">
-                                        Not Completed
+                                        Completed
                                     </span>
 
                                 </div>
@@ -575,7 +607,7 @@
                                 <div class="tag-list">
 
                                     <span class="tag">
-                                        2025
+                                        2026
                                     </span>
 
                                 </div>
@@ -587,13 +619,13 @@
                             <div class="tag-category">
 
                                 <span class="tag-label">
-                                    Other
+                                    Genre
                                 </span>
 
                                 <div class="tag-list">
 
                                     <span class="tag">
-                                        Fantasy
+                                        Baseball
                                     </span>
 
                                 </div>
@@ -613,7 +645,6 @@
 
 
     </main>
-
 
 
     <script src="media.js"></script>

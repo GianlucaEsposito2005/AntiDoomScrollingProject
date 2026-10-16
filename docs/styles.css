@@ -47,6 +47,11 @@ h1 {
     margin-bottom: 30px;
 }
 
+.section-heading {
+    margin-top: 50px;
+    margin-bottom: 20px;
+}
+
 p {
     font-size: 18px;
     line-height: 1.7;

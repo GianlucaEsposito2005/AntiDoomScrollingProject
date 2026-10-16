@@ -53,6 +53,134 @@ h1 {
     margin-bottom: 20px;
 }
 
+/* MEDIA PAGE */
+
+.archive-selector {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 50px;
+}
+
+.archive-selector div {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.archive-selector label {
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.archive-selector select {
+    padding: 10px 14px;
+    font-size: 16px;
+    border: 1px solid #cccccc;
+    border-radius: 6px;
+    background-color: white;
+}
+
+
+.day-entry {
+    margin-bottom: 70px;
+}
+
+.day-entry h2 {
+    font-size: 28px;
+    margin-bottom: 25px;
+}
+
+
+.media-entry {
+    border: 1px solid #dddddd;
+    border-radius: 10px;
+    padding: 25px;
+}
+
+.media-entry h3 {
+    margin-top: 0;
+    margin-bottom: 20px;
+}
+
+
+.media-content {
+    display: flex;
+    gap: 25px;
+}
+
+
+/* Image box */
+
+.media-image {
+    width: 180px;
+    min-width: 180px;
+    height: 250px;
+
+    border: 2px dashed #cccccc;
+    border-radius: 8px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    overflow: hidden;
+}
+
+.media-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+
+/* Text section */
+
+.media-description {
+    flex: 1;
+}
+
+.media-description h4 {
+    font-size: 22px;
+    margin-top: 0;
+    margin-bottom: 10px;
+}
+
+.media-description p {
+    margin-top: 0;
+}
+
+
+/* Tags */
+
+.tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 20px;
+}
+
+.tag {
+    background-color: #eeeeee;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 14px;
+}
+
+
+/* Mobile layout */
+
+@media (max-width: 600px) {
+
+    .media-content {
+        flex-direction: column;
+    }
+
+    .media-image {
+        width: 100%;
+        height: 300px;
+    }
+}
+
 p {
     font-size: 18px;
     line-height: 1.7;

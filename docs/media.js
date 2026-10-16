@@ -1,50 +1,88 @@
-const yearFilter = document.getElementById("year-filter");
-const monthFilter = document.getElementById("month-filter");
-const typeFilter = document.getElementById("type-filter");
-const completionFilter = document.getElementById("completion-filter");
-const releaseFilter = document.getElementById("release-filter");
-const otherFilter = document.getElementById("other-filter");
+const yearFilter =
+    document.getElementById("year-filter");
 
-const filterToggle = document.getElementById("filter-toggle");
-const filterSection = document.getElementById("filter-section");
-const filterClose = document.getElementById("filter-close");
+const monthFilter =
+    document.getElementById("month-filter");
+
+const typeFilter =
+    document.getElementById("type-filter");
+
+const completionFilter =
+    document.getElementById("completion-filter");
+
+const releaseFilter =
+    document.getElementById("release-filter");
+
+const genreFilter =
+    document.getElementById("genre-filter");
 
 
-/* ------------------------------ */
-/* OPEN / CLOSE FILTER MENU       */
-/* ------------------------------ */
+const filterToggle =
+    document.getElementById("filter-toggle");
+
+const filterSection =
+    document.getElementById("filter-section");
+
+const filterClose =
+    document.getElementById("filter-close");
+
+
+
+/* ========================================== */
+/* OPEN / CLOSE FILTER MENU                   */
+/* ========================================== */
 
 filterToggle.addEventListener("click", function () {
+
     filterSection.classList.toggle("hidden");
+
 });
 
 
 filterClose.addEventListener("click", function () {
+
     filterSection.classList.add("hidden");
+
 });
 
 
-/* ------------------------------ */
-/* FILTER MEDIA                   */
-/* ------------------------------ */
+
+/* ========================================== */
+/* FILTER MEDIA                               */
+/* ========================================== */
 
 function filterMedia() {
 
-    const selectedYear = yearFilter.value;
-    const selectedMonth = monthFilter.value;
-    const selectedType = typeFilter.value;
-    const selectedCompletion = completionFilter.value;
-    const selectedRelease = releaseFilter.value;
-    const selectedOther = otherFilter.value;
+    const selectedYear =
+        yearFilter.value;
+
+    const selectedMonth =
+        monthFilter.value;
+
+    const selectedType =
+        typeFilter.value;
+
+    const selectedCompletion =
+        completionFilter.value;
+
+    const selectedRelease =
+        releaseFilter.value;
+
+    const selectedGenre =
+        genreFilter.value;
 
 
-    const days = document.querySelectorAll(".day-entry");
+    const days =
+        document.querySelectorAll(".day-entry");
 
 
     days.forEach(function (day) {
 
-        const dayYear = day.dataset.year;
-        const dayMonth = day.dataset.month;
+        const dayYear =
+            day.dataset.year;
+
+        const dayMonth =
+            day.dataset.month;
 
 
         const yearMatches =
@@ -66,12 +104,17 @@ function filterMedia() {
 
         mediaEntries.forEach(function (entry) {
 
-            const type = entry.dataset.type;
-            const completion = entry.dataset.completion;
-            const release = entry.dataset.release;
+            const type =
+                entry.dataset.type;
 
-            const other =
-                entry.dataset.other || "";
+            const completion =
+                entry.dataset.completion;
+
+            const release =
+                entry.dataset.release;
+
+            const genre =
+                entry.dataset.genre || "";
 
 
             const typeMatches =
@@ -89,13 +132,13 @@ function filterMedia() {
                 selectedRelease === release;
 
 
-            const otherTags =
-                other.split(" ");
+            const genreTags =
+                genre.split(" ");
 
 
-            const otherMatches =
-                selectedOther === "all" ||
-                otherTags.includes(selectedOther);
+            const genreMatches =
+                selectedGenre === "all" ||
+                genreTags.includes(selectedGenre);
 
 
             const shouldShow =
@@ -104,7 +147,7 @@ function filterMedia() {
                 typeMatches &&
                 completionMatches &&
                 releaseMatches &&
-                otherMatches;
+                genreMatches;
 
 
             if (shouldShow) {
@@ -137,18 +180,37 @@ function filterMedia() {
 }
 
 
-/* ------------------------------ */
-/* WATCH FILTER CHANGES           */
-/* ------------------------------ */
 
-yearFilter.addEventListener("change", filterMedia);
+/* ========================================== */
+/* WATCH FILTER CHANGES                       */
+/* ========================================== */
 
-monthFilter.addEventListener("change", filterMedia);
+yearFilter.addEventListener(
+    "change",
+    filterMedia
+);
 
-typeFilter.addEventListener("change", filterMedia);
+monthFilter.addEventListener(
+    "change",
+    filterMedia
+);
 
-completionFilter.addEventListener("change", filterMedia);
+typeFilter.addEventListener(
+    "change",
+    filterMedia
+);
 
-releaseFilter.addEventListener("change", filterMedia);
+completionFilter.addEventListener(
+    "change",
+    filterMedia
+);
 
-otherFilter.addEventListener("change", filterMedia);
+releaseFilter.addEventListener(
+    "change",
+    filterMedia
+);
+
+genreFilter.addEventListener(
+    "change",
+    filterMedia
+);

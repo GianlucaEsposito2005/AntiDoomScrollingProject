@@ -1,27 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Media</title>
+
     <link rel="stylesheet" href="styles.css">
 </head>
 
+
 <body>
 
+    <!-- NAVIGATION -->
     <header>
+
         <nav>
             <a href="index.html">Statement</a>
             <a href="media.html" class="active">Media</a>
             <a href="learned.html">Learned</a>
         </nav>
+
     </header>
+
 
     <main>
 
         <h1>Media</h1>
 
-        <!-- YEAR / MONTH ARCHIVE -->
+
+        <!-- ====================================== -->
+        <!-- ARCHIVE                                -->
+        <!-- ====================================== -->
+
         <div class="archive-selector">
 
             <div>
@@ -32,6 +44,7 @@
                     <option value="2026">2026</option>
                 </select>
             </div>
+
 
             <div>
                 <label for="month-filter">Month</label>
@@ -45,73 +58,232 @@
         </div>
 
 
-        <!-- TAG FILTERS -->
-        <section class="filter-section">
 
-            <h2>Filter Media</h2>
+        <!-- ====================================== -->
+        <!-- FILTER BUTTON                          -->
+        <!-- ====================================== -->
+
+        <button
+            id="filter-toggle"
+            class="filter-toggle"
+            type="button"
+        >
+            Filters
+        </button>
+
+
+
+        <!-- ====================================== -->
+        <!-- FILTER MENU                            -->
+        <!-- ====================================== -->
+
+        <section
+            id="filter-section"
+            class="filter-section hidden"
+        >
+
+            <div class="filter-header">
+
+                <h2>Filter Media</h2>
+
+                <button
+                    id="filter-close"
+                    class="filter-close"
+                    type="button"
+                >
+                    Close
+                </button>
+
+            </div>
+
 
             <div class="filter-grid">
 
-                <!-- MEDIA TYPE -->
+
+                <!-- TYPE -->
+
                 <div class="filter-group">
-                    <h3>Type of Media</h3>
+
+                    <label for="type-filter">
+                        Type of Media
+                    </label>
 
                     <select id="type-filter">
-                        <option value="all">All</option>
-                        <option value="movie">Movie</option>
-                        <option value="tv">TV</option>
-                        <option value="book">Book</option>
-                        <option value="comic">Comic</option>
-                        <option value="music">Music</option>
-                        <option value="game">Game</option>
-                        <option value="podcast">Podcast</option>
-                        <option value="video">Video</option>
+
+                        <option value="all">
+                            All
+                        </option>
+
+                        <option value="movie">
+                            Movie
+                        </option>
+
+                        <option value="tv">
+                            TV
+                        </option>
+
+                        <option value="book">
+                            Book
+                        </option>
+
+                        <option value="comic">
+                            Comic
+                        </option>
+
+                        <option value="music">
+                            Music
+                        </option>
+
+                        <option value="game">
+                            Game
+                        </option>
+
+                        <option value="podcast">
+                            Podcast
+                        </option>
+
+                        <option value="video">
+                            Video
+                        </option>
+
                     </select>
+
                 </div>
+
 
 
                 <!-- COMPLETION -->
+
                 <div class="filter-group">
-                    <h3>Completion</h3>
+
+                    <label for="completion-filter">
+                        Completion
+                    </label>
 
                     <select id="completion-filter">
-                        <option value="all">All</option>
-                        <option value="completed">Completed</option>
-                        <option value="not-completed">Not Completed</option>
+
+                        <option value="all">
+                            All
+                        </option>
+
+                        <option value="completed">
+                            Completed
+                        </option>
+
+                        <option value="not-completed">
+                            Not Completed
+                        </option>
+
                     </select>
+
                 </div>
 
 
-                <!-- YEAR TAG -->
+
+                <!-- RELEASE YEAR -->
+
                 <div class="filter-group">
-                    <h3>Year Released</h3>
+
+                    <label for="release-filter">
+                        Year Released
+                    </label>
 
                     <select id="release-filter">
-                        <option value="all">All</option>
-                        <option value="2026">2026</option>
-                        <option value="2025">2025</option>
-                        <option value="2020s">2020s</option>
-                        <option value="2010s">2010s</option>
-                        <option value="2000s">2000s</option>
-                        <option value="older">Older</option>
+
+                        <option value="all">
+                            All
+                        </option>
+
+                        <option value="2026">
+                            2026
+                        </option>
+
+                        <option value="2025">
+                            2025
+                        </option>
+
+                        <option value="2024">
+                            2024
+                        </option>
+
+                        <option value="2023">
+                            2023
+                        </option>
+
+                        <option value="2022">
+                            2022
+                        </option>
+
+                        <option value="2021">
+                            2021
+                        </option>
+
+                        <option value="2020">
+                            2020
+                        </option>
+
+                        <option value="2010s">
+                            2010s
+                        </option>
+
+                        <option value="2000s">
+                            2000s
+                        </option>
+
+                        <option value="older">
+                            Older
+                        </option>
+
                     </select>
+
                 </div>
+
 
 
                 <!-- OTHER -->
+
                 <div class="filter-group">
-                    <h3>Other</h3>
+
+                    <label for="other-filter">
+                        Other
+                    </label>
 
                     <select id="other-filter">
-                        <option value="all">All</option>
-                        <option value="comedy">Comedy</option>
-                        <option value="drama">Drama</option>
-                        <option value="horror">Horror</option>
-                        <option value="action">Action</option>
-                        <option value="sci-fi">Sci-Fi</option>
-                        <option value="fantasy">Fantasy</option>
-                        <option value="superhero">Superhero</option>
+
+                        <option value="all">
+                            All
+                        </option>
+
+                        <option value="action">
+                            Action
+                        </option>
+
+                        <option value="comedy">
+                            Comedy
+                        </option>
+
+                        <option value="drama">
+                            Drama
+                        </option>
+
+                        <option value="fantasy">
+                            Fantasy
+                        </option>
+
+                        <option value="horror">
+                            Horror
+                        </option>
+
+                        <option value="sci-fi">
+                            Sci-Fi
+                        </option>
+
+                        <option value="superhero">
+                            Superhero
+                        </option>
+
                     </select>
+
                 </div>
 
             </div>
@@ -119,17 +291,25 @@
         </section>
 
 
-        <!-- OCTOBER 16 -->
+
+        <!-- ====================================== -->
+        <!-- OCTOBER 16                             -->
+        <!-- ====================================== -->
+
         <section
             class="day-entry"
             data-year="2026"
             data-month="october"
         >
 
-            <h2>Friday, October 16, 2026</h2>
+            <h2>
+                Friday, October 16, 2026
+            </h2>
 
 
-            <!-- MEDIA ENTRY -->
+
+            <!-- MEDIA ITEM -->
+
             <article
                 class="media-entry"
                 data-type="movie"
@@ -140,34 +320,46 @@
 
                 <h3>Media Consumed</h3>
 
+
                 <div class="media-content">
 
+
                     <!-- IMAGE -->
+
                     <div class="media-image">
 
-                        <img
-                            src="images/example.jpg"
-                            alt="Media cover"
-                        >
+                        <span class="image-placeholder">
+                            Add Image
+                        </span>
 
                     </div>
 
 
+
                     <!-- INFORMATION -->
+
                     <div class="media-description">
 
-                        <h4>Title of Media</h4>
+                        <h4>
+                            Title of Media
+                        </h4>
+
 
                         <p>
                             Write what you thought about the movie,
-                            book, game, album, comic, or other media here.
+                            book, game, album, comic, or other piece
+                            of media here.
                         </p>
 
 
+
                         <!-- RATING -->
+
                         <div class="rating-section">
 
-                            <strong>Rating:</strong>
+                            <span class="rating-label">
+                                Rating:
+                            </span>
 
                             <span
                                 class="rating"
@@ -179,110 +371,11 @@
                         </div>
 
 
+
                         <!-- TAGS -->
-                        <div class="tag-categories">
-
-                            <div class="tag-category">
-
-                                <span class="tag-label">Type</span>
-
-                                <span class="tag">
-                                    Movie
-                                </span>
-
-                            </div>
-
-
-                            <div class="tag-category">
-
-                                <span class="tag-label">Status</span>
-
-                                <span class="tag">
-                                    Completed
-                                </span>
-
-                            </div>
-
-
-                            <div class="tag-category">
-
-                                <span class="tag-label">Year</span>
-
-                                <span class="tag">
-                                    2022
-                                </span>
-
-                            </div>
-
-
-                            <div class="tag-category">
-
-                                <span class="tag-label">Other</span>
-
-                                <span class="tag">
-                                    Superhero
-                                </span>
-
-                                <span class="tag">
-                                    Drama
-                                </span>
-
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-            </article>
-
-        </section>
-
-
-
-        <!-- OCTOBER 15 -->
-        <section
-            class="day-entry"
-            data-year="2026"
-            data-month="october"
-        >
-
-            <h2>Thursday, October 15, 2026</h2>
-
-
-            <article
-                class="media-entry"
-                data-type="book"
-                data-completion="not-completed"
-                data-release="2020s"
-                data-other="fantasy"
-            >
-
-                <h3>Media Consumed</h3>
-
-                <div class="media-content">
-
-                    <div class="media-image">
-
-                        <img
-                            src="images/example.jpg"
-                            alt="Media cover"
-                        >
-
-                    </div>
-
-
-                    <div class="media-description">
-
-                        <h4>Title of Media</h4>
-
-                        <p>
-                            Write your description here.
-                        </p>
-
 
                         <div class="tag-categories">
+
 
                             <div class="tag-category">
 
@@ -290,11 +383,16 @@
                                     Type
                                 </span>
 
-                                <span class="tag">
-                                    Book
-                                </span>
+                                <div class="tag-list">
+
+                                    <span class="tag">
+                                        Movie
+                                    </span>
+
+                                </div>
 
                             </div>
+
 
 
                             <div class="tag-category">
@@ -303,11 +401,16 @@
                                     Status
                                 </span>
 
-                                <span class="tag">
-                                    Not Completed
-                                </span>
+                                <div class="tag-list">
+
+                                    <span class="tag">
+                                        Completed
+                                    </span>
+
+                                </div>
 
                             </div>
+
 
 
                             <div class="tag-category">
@@ -316,11 +419,16 @@
                                     Year
                                 </span>
 
-                                <span class="tag">
-                                    2020s
-                                </span>
+                                <div class="tag-list">
+
+                                    <span class="tag">
+                                        2022
+                                    </span>
+
+                                </div>
 
                             </div>
+
 
 
                             <div class="tag-category">
@@ -329,11 +437,20 @@
                                     Other
                                 </span>
 
-                                <span class="tag">
-                                    Fantasy
-                                </span>
+                                <div class="tag-list">
+
+                                    <span class="tag">
+                                        Superhero
+                                    </span>
+
+                                    <span class="tag">
+                                        Drama
+                                    </span>
+
+                                </div>
 
                             </div>
+
 
                         </div>
 
@@ -345,10 +462,162 @@
 
         </section>
 
+
+
+        <!-- ====================================== -->
+        <!-- OCTOBER 15                             -->
+        <!-- ====================================== -->
+
+        <section
+            class="day-entry"
+            data-year="2026"
+            data-month="october"
+        >
+
+            <h2>
+                Thursday, October 15, 2026
+            </h2>
+
+
+            <article
+                class="media-entry"
+                data-type="book"
+                data-completion="not-completed"
+                data-release="2025"
+                data-other="fantasy"
+            >
+
+                <h3>Media Consumed</h3>
+
+
+                <div class="media-content">
+
+
+                    <!-- IMAGE -->
+
+                    <div class="media-image">
+
+                        <span class="image-placeholder">
+                            Add Image
+                        </span>
+
+                    </div>
+
+
+
+                    <!-- INFORMATION -->
+
+                    <div class="media-description">
+
+                        <h4>
+                            Title of Media
+                        </h4>
+
+
+                        <p>
+                            Write your description here.
+                        </p>
+
+
+
+                        <!--
+                        No rating is shown because this
+                        media is not completed.
+                        -->
+
+
+
+                        <div class="tag-categories">
+
+
+                            <div class="tag-category">
+
+                                <span class="tag-label">
+                                    Type
+                                </span>
+
+                                <div class="tag-list">
+
+                                    <span class="tag">
+                                        Book
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+
+
+                            <div class="tag-category">
+
+                                <span class="tag-label">
+                                    Status
+                                </span>
+
+                                <div class="tag-list">
+
+                                    <span class="tag">
+                                        Not Completed
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+
+
+                            <div class="tag-category">
+
+                                <span class="tag-label">
+                                    Year
+                                </span>
+
+                                <div class="tag-list">
+
+                                    <span class="tag">
+                                        2025
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+
+
+                            <div class="tag-category">
+
+                                <span class="tag-label">
+                                    Other
+                                </span>
+
+                                <div class="tag-list">
+
+                                    <span class="tag">
+                                        Fantasy
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </article>
+
+        </section>
+
+
     </main>
+
 
 
     <script src="media.js"></script>
 
 </body>
+
 </html>

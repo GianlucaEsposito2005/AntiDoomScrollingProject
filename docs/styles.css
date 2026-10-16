@@ -48,7 +48,8 @@ h1 {
 }
 
 .section-heading {
-    margin-top: 50px;
+    margin-top: 0;
+    padding-top: 50px;
     margin-bottom: 20px;
 }
 

@@ -2,10 +2,13 @@
 /* TMDB PROXY                                 */
 /* ========================================== */
 
-/* The Worker URL is public. The TMDB key stays in a Cloudflare Secret. */
+/*
+    Replace this with your actual
+    Cloudflare Worker URL after deployment.
+*/
 
 const TMDB_PROXY_URL =
-    "https://anti-doomscrolling-tmdb.anti-doomscrolling-tmdb.workers.dev/movie";
+    "https://YOUR-WORKER-URL.workers.dev/movie";
 
 
 
@@ -104,7 +107,53 @@ function formatNumber(number) {
 
 
 /* ========================================== */
-/* ADD OPTION TO SELECT                       */
+/* FORMAT RUNTIME                             */
+/* ========================================== */
+
+function formatRuntime(minutes) {
+
+    if (
+        typeof minutes !== "number" ||
+        minutes <= 0
+    ) {
+
+        return "Not available";
+
+    }
+
+
+    const hours =
+        Math.floor(
+            minutes / 60
+        );
+
+
+    const remainingMinutes =
+        minutes % 60;
+
+
+    if (hours === 0) {
+
+        return `${remainingMinutes}m`;
+
+    }
+
+
+    if (remainingMinutes === 0) {
+
+        return `${hours}h`;
+
+    }
+
+
+    return `${hours}h ${remainingMinutes}m`;
+
+}
+
+
+
+/* ========================================== */
+/* ADD FILTER OPTION                          */
 /* ========================================== */
 
 function addSelectOption(
@@ -114,11 +163,12 @@ function addSelectOption(
 ) {
 
     const alreadyExists =
-        Array.from(select.options)
-            .some(
-                option =>
-                    option.value === value
-            );
+        Array.from(
+            select.options
+        ).some(
+            option =>
+                option.value === value
+        );
 
 
     if (alreadyExists) {
@@ -129,7 +179,9 @@ function addSelectOption(
 
 
     const option =
-        document.createElement("option");
+        document.createElement(
+            "option"
+        );
 
 
     option.value =
@@ -148,7 +200,7 @@ function addSelectOption(
 
 
 /* ========================================== */
-/* REBUILD YEAR / GENRE FILTERS               */
+/* REBUILD DYNAMIC FILTERS                    */
 /* ========================================== */
 
 function rebuildDynamicFilters() {
@@ -196,7 +248,17 @@ function rebuildDynamicFilters() {
                 tag.textContent.trim();
 
 
-            if (!label) {
+            /*
+                Ignore temporary loading/error
+                messages.
+            */
+
+            if (
+                !label ||
+                label === "Loading..." ||
+                label === "Unavailable" ||
+                label === "Unknown"
+            ) {
 
                 return;
 
@@ -217,11 +279,6 @@ function rebuildDynamicFilters() {
     });
 
 
-
-    /*
-        Preserve current choices while
-        rebuilding the option lists.
-    */
 
     const currentRelease =
         releaseFilter.value;
@@ -256,10 +313,14 @@ function rebuildDynamicFilters() {
         '<option value="all">All</option>';
 
 
-    Array.from(genres.entries())
+    Array.from(
+        genres.entries()
+    )
         .sort(
             (a, b) =>
-                a[1].localeCompare(b[1])
+                a[1].localeCompare(
+                    b[1]
+                )
         )
         .forEach(function (
             [value, label]
@@ -276,11 +337,12 @@ function rebuildDynamicFilters() {
 
 
     if (
-        Array.from(releaseFilter.options)
-            .some(
-                option =>
-                    option.value === currentRelease
-            )
+        Array.from(
+            releaseFilter.options
+        ).some(
+            option =>
+                option.value === currentRelease
+        )
     ) {
 
         releaseFilter.value =
@@ -291,11 +353,12 @@ function rebuildDynamicFilters() {
 
 
     if (
-        Array.from(genreFilter.options)
-            .some(
-                option =>
-                    option.value === currentGenre
-            )
+        Array.from(
+            genreFilter.options
+        ).some(
+            option =>
+                option.value === currentGenre
+        )
     ) {
 
         genreFilter.value =
@@ -308,7 +371,7 @@ function rebuildDynamicFilters() {
 
 
 /* ========================================== */
-/* LOAD TMDB MOVIES                           */
+/* LOAD ALL TMDB MOVIES                       */
 /* ========================================== */
 
 async function loadTmdbMovieData() {
@@ -320,11 +383,14 @@ async function loadTmdbMovieData() {
 
 
     const requests =
-        Array.from(movieEntries)
-            .map(
-                entry =>
-                    loadSingleTmdbMovie(entry)
-            );
+        Array.from(
+            movieEntries
+        ).map(
+            entry =>
+                loadSingleTmdbMovie(
+                    entry
+                )
+        );
 
 
     await Promise.allSettled(
@@ -372,6 +438,11 @@ async function loadSingleTmdbMovie(
             ".tmdb-year"
         );
 
+    const runtimeElement =
+        entry.querySelector(
+            ".tmdb-runtime"
+        );
+
     const certificationElement =
         entry.querySelector(
             ".tmdb-certification"
@@ -386,6 +457,7 @@ async function loadSingleTmdbMovie(
         entry.querySelector(
             ".tmdb-rating"
         );
+
 
 
     try {
@@ -414,7 +486,9 @@ async function loadSingleTmdbMovie(
 
 
 
-        /* TITLE */
+        /* ====================================== */
+        /* TITLE                                  */
+        /* ====================================== */
 
         if (movie.title) {
 
@@ -425,23 +499,30 @@ async function loadSingleTmdbMovie(
 
 
 
-        /* POSTER */
+        /* ====================================== */
+        /* POSTER                                 */
+        /* ====================================== */
 
         if (movie.posterUrl) {
 
             poster.src =
                 movie.posterUrl;
 
+
             poster.alt =
                 `${movie.title} movie poster`;
+
 
             poster.hidden =
                 false;
 
+
             posterPlaceholder.hidden =
                 true;
 
-        } else {
+        }
+
+        else {
 
             posterPlaceholder.textContent =
                 "Poster unavailable";
@@ -450,19 +531,24 @@ async function loadSingleTmdbMovie(
 
 
 
-        /* RELEASE YEAR */
+        /* ====================================== */
+        /* RELEASE YEAR                           */
+        /* ====================================== */
 
         if (movie.releaseYear) {
 
             yearElement.textContent =
                 movie.releaseYear;
 
+
             entry.dataset.release =
                 String(
                     movie.releaseYear
                 );
 
-        } else {
+        }
+
+        else {
 
             yearElement.textContent =
                 "Unknown";
@@ -471,7 +557,20 @@ async function loadSingleTmdbMovie(
 
 
 
-        /* MATURITY RATING */
+        /* ====================================== */
+        /* RUNTIME                                */
+        /* ====================================== */
+
+        runtimeElement.textContent =
+            formatRuntime(
+                movie.runtime
+            );
+
+
+
+        /* ====================================== */
+        /* MATURITY RATING                        */
+        /* ====================================== */
 
         if (movie.certification) {
 
@@ -480,7 +579,9 @@ async function loadSingleTmdbMovie(
                     ? `${movie.certification} (${movie.certificationRegion})`
                     : movie.certification;
 
-        } else {
+        }
+
+        else {
 
             certificationElement.textContent =
                 "Not available";
@@ -489,14 +590,19 @@ async function loadSingleTmdbMovie(
 
 
 
-        /* TMDB COMMUNITY RATING */
+        /* ====================================== */
+        /* TMDB RATING                            */
+        /* ====================================== */
 
         if (
-            typeof movie.voteAverage === "number"
+            typeof movie.voteAverage ===
+            "number"
         ) {
 
             const roundedRating =
-                movie.voteAverage.toFixed(1);
+                movie.voteAverage.toFixed(
+                    1
+                );
 
 
             const voteText =
@@ -508,7 +614,9 @@ async function loadSingleTmdbMovie(
             ratingElement.textContent =
                 `${roundedRating} / 10${voteText}`;
 
-        } else {
+        }
+
+        else {
 
             ratingElement.textContent =
                 "Not available";
@@ -517,7 +625,9 @@ async function loadSingleTmdbMovie(
 
 
 
-        /* GENRES */
+        /* ====================================== */
+        /* GENRES                                 */
+        /* ====================================== */
 
         genreContainer.innerHTML =
             "";
@@ -544,6 +654,7 @@ async function loadSingleTmdbMovie(
                     tag.className =
                         "tag";
 
+
                     tag.textContent =
                         genre;
 
@@ -554,7 +665,9 @@ async function loadSingleTmdbMovie(
 
 
                     genreValues.push(
-                        slugify(genre)
+                        slugify(
+                            genre
+                        )
                     );
 
                 }
@@ -564,7 +677,9 @@ async function loadSingleTmdbMovie(
             entry.dataset.genre =
                 genreValues.join(" ");
 
-        } else {
+        }
+
+        else {
 
             const tag =
                 document.createElement(
@@ -574,6 +689,7 @@ async function loadSingleTmdbMovie(
 
             tag.className =
                 "tag";
+
 
             tag.textContent =
                 "Unknown";
@@ -598,14 +714,22 @@ async function loadSingleTmdbMovie(
         posterPlaceholder.textContent =
             "Poster unavailable";
 
+
         yearElement.textContent =
             "Unavailable";
+
+
+        runtimeElement.textContent =
+            "Unavailable";
+
 
         certificationElement.textContent =
             "Unavailable";
 
+
         genreContainer.innerHTML =
             '<span class="tag">Unavailable</span>';
+
 
         ratingElement.textContent =
             "Unavailable";
@@ -775,25 +899,30 @@ yearFilter.addEventListener(
     filterMedia
 );
 
+
 monthFilter.addEventListener(
     "change",
     filterMedia
 );
+
 
 typeFilter.addEventListener(
     "change",
     filterMedia
 );
 
+
 completionFilter.addEventListener(
     "change",
     filterMedia
 );
 
+
 releaseFilter.addEventListener(
     "change",
     filterMedia
 );
+
 
 genreFilter.addEventListener(
     "change",

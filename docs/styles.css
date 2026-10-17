@@ -64,7 +64,7 @@ nav a.active {
 
 
 /* ========================================== */
-/* MAIN PAGE                                  */
+/* MAIN                                       */
 /* ========================================== */
 
 main {
@@ -77,11 +77,11 @@ main {
 
 
 h1 {
-    font-size: 36px;
-
     margin-top: 0;
 
     margin-bottom: 30px;
+
+    font-size: 36px;
 }
 
 
@@ -91,11 +91,11 @@ h2 {
 
 
 p {
+    margin-bottom: 20px;
+
     font-size: 18px;
 
     line-height: 1.7;
-
-    margin-bottom: 20px;
 }
 
 
@@ -115,7 +115,7 @@ p {
 
 
 /* ========================================== */
-/* MEDIA ARCHIVE                              */
+/* ARCHIVE SELECTORS                          */
 /* ========================================== */
 
 .archive-selector {
@@ -148,15 +148,15 @@ p {
 
     padding: 10px 14px;
 
-    font-size: 15px;
-
-    font-family: inherit;
-
     background-color: #ffffff;
 
     border: 1px solid #aaaaaa;
 
     border-radius: 0;
+
+    font-family: inherit;
+
+    font-size: 15px;
 }
 
 
@@ -261,7 +261,8 @@ p {
 .filter-grid {
     display: grid;
 
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns:
+        repeat(4, 1fr);
 
     gap: 20px;
 }
@@ -302,7 +303,7 @@ p {
 
 
 /* ========================================== */
-/* DAY                                        */
+/* MEDIA DAYS                                 */
 /* ========================================== */
 
 .day-entry {
@@ -391,6 +392,8 @@ p {
 
 
 .image-placeholder {
+    padding: 10px;
+
     color: #777777;
 
     font-size: 14px;
@@ -401,7 +404,7 @@ p {
 
 
 /* ========================================== */
-/* MEDIA DESCRIPTION                          */
+/* MEDIA TEXT                                 */
 /* ========================================== */
 
 .media-description {
@@ -414,9 +417,11 @@ p {
 .media-description h4 {
     margin-top: 0;
 
-    margin-bottom: 12px;
+    margin-bottom: 14px;
 
     font-size: 22px;
+
+    line-height: 1.25;
 }
 
 
@@ -431,9 +436,23 @@ p {
 }
 
 
+.media-comment {
+    margin-bottom: 25px;
+}
+
+
+.media-comment h5 {
+    margin-top: 0;
+
+    margin-bottom: 8px;
+
+    font-size: 15px;
+}
+
+
 
 /* ========================================== */
-/* RATING                                     */
+/* RATINGS                                    */
 /* ========================================== */
 
 .rating-section {
@@ -445,7 +464,7 @@ p {
 
     margin-top: 5px;
 
-    margin-bottom: 28px;
+    margin-bottom: 14px;
 }
 
 
@@ -463,9 +482,32 @@ p {
 }
 
 
+.external-rating {
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    margin-bottom: 28px;
+}
+
+
+.external-rating-label {
+    font-size: 15px;
+
+    font-weight: bold;
+}
+
+
+.tmdb-rating {
+    font-size: 15px;
+}
+
+
 
 /* ========================================== */
-/* TAG AREA                                   */
+/* TAGS                                       */
 /* ========================================== */
 
 .tag-categories {
@@ -482,7 +524,8 @@ p {
 .tag-category {
     display: grid;
 
-    grid-template-columns: 65px 1fr;
+    grid-template-columns:
+        70px 1fr;
 
     align-items: start;
 
@@ -527,105 +570,39 @@ p {
 
 
 /* ========================================== */
-/* MOBILE                                     */
+/* TMDB CREDIT                                */
 /* ========================================== */
 
-@media (max-width: 700px) {
+.tmdb-credit {
+    padding-top: 25px;
 
-    nav {
-        flex-wrap: wrap;
+    margin-top: 50px;
 
-        gap: 20px;
-    }
+    border-top: 1px solid #dddddd;
 
-
-    main {
-        margin-top: 40px;
-    }
+    color: #666666;
+}
 
 
-    .archive-selector {
-        flex-wrap: wrap;
-    }
+.tmdb-credit p {
+    margin: 4px 0;
 
+    font-size: 12px;
 
-    .filter-grid {
-        grid-template-columns: 1fr 1fr;
-    }
-
-
-    .media-content {
-        flex-direction: column;
-
-        gap: 25px;
-    }
-
-
-    .media-image {
-        width: 180px;
-
-        height: 250px;
-    }
-
+    line-height: 1.5;
 }
 
 
 
-@media (max-width: 450px) {
-
-    .archive-selector {
-        flex-direction: column;
-    }
-
-
-    .archive-selector > div {
-        width: 100%;
-    }
-
-
-    .archive-selector select {
-        width: 100%;
-    }
-
-
-    .filter-grid {
-        grid-template-columns: 1fr;
-    }
-
-
-    .filter-header {
-        align-items: flex-start;
-    }
-
-
-    .media-image {
-        width: 100%;
-
-        height: 350px;
-    }
-
-
-    .tag-category {
-        grid-template-columns: 1fr;
-
-        row-gap: 6px;
-    }
-
-
-    .tag-label {
-        padding-top: 0;
-    }
-
-}
-
 /* ========================================== */
-/* LEARNED PAGE                               */
+/* LEARNED FILTER                             */
 /* ========================================== */
 
 .learned-filter-grid {
     display: grid;
 
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns:
+        repeat(2, 1fr);
 
     gap: 20px;
 }
@@ -650,7 +627,7 @@ p {
 
 
 /* ========================================== */
-/* LEARNED ENTRY                              */
+/* LEARNED CARD                               */
 /* ========================================== */
 
 .learned-entry {
@@ -677,7 +654,7 @@ p {
 
 
 /* ========================================== */
-/* DESCRIPTION / COMMENT                      */
+/* LEARNED DESCRIPTION / COMMENT              */
 /* ========================================== */
 
 .learned-text-section {
@@ -705,10 +682,8 @@ p {
 }
 
 
-
-/* Make Description and Comment visually clear */
-
-.learned-text-section + .learned-text-section {
+.learned-text-section +
+.learned-text-section {
     padding-top: 25px;
 
     border-top: 1px solid #eeeeee;
@@ -717,13 +692,107 @@ p {
 
 
 /* ========================================== */
-/* LEARNED MOBILE                             */
+/* TABLET / MOBILE                            */
 /* ========================================== */
+
+@media (max-width: 700px) {
+
+    nav {
+        flex-wrap: wrap;
+
+        gap: 20px;
+    }
+
+
+    main {
+        margin-top: 40px;
+    }
+
+
+    .archive-selector {
+        flex-wrap: wrap;
+    }
+
+
+    .filter-grid {
+        grid-template-columns:
+            1fr 1fr;
+    }
+
+
+    .media-content {
+        flex-direction: column;
+
+        gap: 25px;
+    }
+
+
+    .media-image {
+        width: 180px;
+
+        height: 250px;
+    }
+
+}
+
+
 
 @media (max-width: 600px) {
 
     .learned-filter-grid {
-        grid-template-columns: 1fr;
+        grid-template-columns:
+            1fr;
+    }
+
+}
+
+
+
+@media (max-width: 450px) {
+
+    .archive-selector {
+        flex-direction: column;
+    }
+
+
+    .archive-selector > div {
+        width: 100%;
+    }
+
+
+    .archive-selector select {
+        width: 100%;
+    }
+
+
+    .filter-grid {
+        grid-template-columns:
+            1fr;
+    }
+
+
+    .filter-header {
+        align-items: flex-start;
+    }
+
+
+    .media-image {
+        width: 100%;
+
+        height: 350px;
+    }
+
+
+    .tag-category {
+        grid-template-columns:
+            1fr;
+
+        row-gap: 6px;
+    }
+
+
+    .tag-label {
+        padding-top: 0;
     }
 
 }

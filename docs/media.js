@@ -2,17 +2,10 @@
 /* TMDB PROXY                                 */
 /* ========================================== */
 
-/*
-    IMPORTANT:
-
-    Replace this URL after you create your
-    Cloudflare Worker.
-
-    DO NOT put your TMDB token in this file.
-*/
+/* The Worker URL is public. The TMDB key stays in a Cloudflare Secret. */
 
 const TMDB_PROXY_URL =
-    "https://YOUR-WORKER-URL.workers.dev/movie";
+    "https://anti-doomscrolling-tmdb.anti-doomscrolling-tmdb.workers.dev/movie";
 
 
 

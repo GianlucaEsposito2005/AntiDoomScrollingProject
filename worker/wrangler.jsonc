@@ -1,0 +1,19 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "anti-doomscrolling-tmdb",
+  "main": "src/index.js",
+  "compatibility_date": "2026-10-16",
+  "secrets": {
+    "required": ["TMDB_API_KEY"]
+  },
+  "ratelimits": [
+    {
+      "name": "UPSTREAM_RATE_LIMITER",
+      "namespace_id": "1002",
+      "simple": {
+        "limit": 300,
+        "period": 60
+      }
+    }
+  ]
+}

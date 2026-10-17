@@ -2,13 +2,10 @@
 /* TMDB PROXY                                 */
 /* ========================================== */
 
-/*
-    Replace this with your actual
-    Cloudflare Worker URL after deployment.
-*/
+/* The Worker URL is public. The TMDB key stays in a Cloudflare Secret. */
 
 const TMDB_PROXY_URL =
-    "https://YOUR-WORKER-URL.workers.dev/movie";
+    "https://anti-doomscrolling-tmdb.anti-doomscrolling-tmdb.workers.dev/movie";
 
 
 
@@ -561,10 +558,14 @@ async function loadSingleTmdbMovie(
         /* RUNTIME                                */
         /* ====================================== */
 
-        runtimeElement.textContent =
-            formatRuntime(
-                movie.runtime
-            );
+        if (runtimeElement) {
+
+            runtimeElement.textContent =
+                formatRuntime(
+                    movie.runtime
+                );
+
+        }
 
 
 
@@ -719,8 +720,12 @@ async function loadSingleTmdbMovie(
             "Unavailable";
 
 
-        runtimeElement.textContent =
-            "Unavailable";
+        if (runtimeElement) {
+
+            runtimeElement.textContent =
+                "Unavailable";
+
+        }
 
 
         certificationElement.textContent =

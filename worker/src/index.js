@@ -13,6 +13,9 @@ const TMDB_API_BASE =
 const TMDB_IMAGE_BASE =
   "https://image.tmdb.org/t/p/w500";
 
+const CACHE_VERSION =
+  "v2-runtime";
+
 
 export default {
 
@@ -116,7 +119,7 @@ export default {
 
     const cacheKey =
       new Request(
-        `${url.origin}/__cache/movie/${movieId}`
+        `${url.origin}/__cache/${CACHE_VERSION}/movie/${movieId}`
       );
 
 

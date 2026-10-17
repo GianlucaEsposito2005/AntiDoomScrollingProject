@@ -617,3 +617,113 @@ p {
     }
 
 }
+
+/* ========================================== */
+/* LEARNED PAGE                               */
+/* ========================================== */
+
+.learned-filter-grid {
+    display: grid;
+
+    grid-template-columns: repeat(2, 1fr);
+
+    gap: 20px;
+}
+
+
+
+/* ========================================== */
+/* LEARNED DAYS                               */
+/* ========================================== */
+
+.learned-day-entry {
+    margin-bottom: 80px;
+}
+
+
+.learned-day-entry > h2 {
+    margin-bottom: 25px;
+
+    font-size: 27px;
+}
+
+
+
+/* ========================================== */
+/* LEARNED ENTRY                              */
+/* ========================================== */
+
+.learned-entry {
+    padding: 25px;
+
+    margin-bottom: 30px;
+
+    background-color: #ffffff;
+
+    border: 1px solid #cccccc;
+
+    border-radius: 0;
+}
+
+
+.learned-entry > h3 {
+    margin-top: 0;
+
+    margin-bottom: 30px;
+
+    font-size: 23px;
+}
+
+
+
+/* ========================================== */
+/* DESCRIPTION / COMMENT                      */
+/* ========================================== */
+
+.learned-text-section {
+    margin-bottom: 30px;
+}
+
+
+.learned-text-section h4 {
+    margin-top: 0;
+
+    margin-bottom: 8px;
+
+    font-size: 17px;
+}
+
+
+.learned-text-section p {
+    margin-top: 0;
+
+    margin-bottom: 0;
+
+    font-size: 17px;
+
+    line-height: 1.7;
+}
+
+
+
+/* Make Description and Comment visually clear */
+
+.learned-text-section + .learned-text-section {
+    padding-top: 25px;
+
+    border-top: 1px solid #eeeeee;
+}
+
+
+
+/* ========================================== */
+/* LEARNED MOBILE                             */
+/* ========================================== */
+
+@media (max-width: 600px) {
+
+    .learned-filter-grid {
+        grid-template-columns: 1fr;
+    }
+
+}

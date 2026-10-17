@@ -31,28 +31,50 @@
 
 
         <!-- ====================================== -->
-        <!-- ARCHIVE                                -->
+        <!-- YEAR / MONTH                           -->
         <!-- ====================================== -->
 
         <div class="archive-selector">
 
             <div>
-                <label for="year-filter">Year</label>
+
+                <label for="year-filter">
+                    Year
+                </label>
 
                 <select id="year-filter">
-                    <option value="all">All</option>
-                    <option value="2026">2026</option>
+
+                    <option value="all">
+                        All
+                    </option>
+
+                    <option value="2026">
+                        2026
+                    </option>
+
                 </select>
+
             </div>
 
 
             <div>
-                <label for="month-filter">Month</label>
+
+                <label for="month-filter">
+                    Month
+                </label>
 
                 <select id="month-filter">
-                    <option value="all">All</option>
-                    <option value="october">October</option>
+
+                    <option value="all">
+                        All
+                    </option>
+
+                    <option value="october">
+                        October
+                    </option>
+
                 </select>
+
             </div>
 
         </div>
@@ -84,7 +106,9 @@
 
             <div class="filter-header">
 
-                <h2>Filter Media</h2>
+                <h2>
+                    Filter Media
+                </h2>
 
                 <button
                     id="filter-close"
@@ -100,7 +124,7 @@
             <div class="filter-grid">
 
 
-                <!-- TYPE OF MEDIA -->
+                <!-- TYPE -->
 
                 <div class="filter-group">
 
@@ -110,7 +134,9 @@
 
                     <select id="type-filter">
 
-                        <option value="all">All</option>
+                        <option value="all">
+                            All
+                        </option>
 
                         <option value="movie">
                             Movie
@@ -196,46 +222,6 @@
                             All
                         </option>
 
-                        <option value="2026">
-                            2026
-                        </option>
-
-                        <option value="2025">
-                            2025
-                        </option>
-
-                        <option value="2024">
-                            2024
-                        </option>
-
-                        <option value="2023">
-                            2023
-                        </option>
-
-                        <option value="2022">
-                            2022
-                        </option>
-
-                        <option value="2021">
-                            2021
-                        </option>
-
-                        <option value="2020">
-                            2020
-                        </option>
-
-                        <option value="2010s">
-                            2010s
-                        </option>
-
-                        <option value="2000s">
-                            2000s
-                        </option>
-
-                        <option value="older">
-                            Older
-                        </option>
-
                     </select>
 
                 </div>
@@ -254,54 +240,6 @@
 
                         <option value="all">
                             All
-                        </option>
-
-                        <option value="action">
-                            Action
-                        </option>
-
-                        <option value="comedy">
-                            Comedy
-                        </option>
-
-                        <option value="drama">
-                            Drama
-                        </option>
-
-                        <option value="fantasy">
-                            Fantasy
-                        </option>
-
-                        <option value="horror">
-                            Horror
-                        </option>
-
-                        <option value="sci-fi">
-                            Sci-Fi
-                        </option>
-
-                        <option value="superhero">
-                            Superhero
-                        </option>
-
-                        <option value="baseball">
-                            Baseball
-                        </option>
-
-                        <option value="basketball">
-                            Basketball
-                        </option>
-
-                        <option value="football">
-                            Football
-                        </option>
-
-                        <option value="american-football">
-                            American Football
-                        </option>
-
-                        <option value="hockey">
-                            Hockey
                         </option>
 
                     </select>
@@ -329,28 +267,42 @@
             </h2>
 
 
+            <!-- ================================== -->
+            <!-- SPIDER-MAN                         -->
+            <!-- TMDB ID 557                        -->
+            <!-- ================================== -->
 
             <article
                 class="media-entry"
                 data-type="movie"
                 data-completion="completed"
-                data-release="2022"
-                data-genre="superhero drama"
+                data-release=""
+                data-genre=""
+                data-tmdb-id="557"
             >
 
-                <h3>Media Consumed</h3>
+                <h3>
+                    Media Consumed
+                </h3>
 
 
                 <div class="media-content">
 
 
-                    <!-- IMAGE -->
+                    <!-- MOVIE POSTER -->
 
                     <div class="media-image">
 
-                        <span class="image-placeholder">
-                            Add Image
+                        <span class="image-placeholder tmdb-image-placeholder">
+                            Loading poster...
                         </span>
+
+                        <img
+                            class="tmdb-poster"
+                            src=""
+                            alt=""
+                            hidden
+                        >
 
                     </div>
 
@@ -360,32 +312,54 @@
 
                     <div class="media-description">
 
-                        <h4>
-                            Title of Media
+                        <h4 class="tmdb-title">
+                            Spider-Man
                         </h4>
 
 
-                        <p>
-                            Write what you thought about the movie,
-                            book, game, album, comic, sport, or other
-                            piece of media here.
-                        </p>
+                        <div class="media-comment">
+
+                            <h5>
+                                Comment
+                            </h5>
+
+                            <p>
+                                I didnt actually watch this today, im just testing lol
+                            </p>
+
+                        </div>
 
 
 
-                        <!-- RATING -->
+                        <!-- YOUR RATING -->
 
                         <div class="rating-section">
 
                             <span class="rating-label">
-                                Rating:
+                                My Rating:
                             </span>
 
                             <span
                                 class="rating"
-                                aria-label="4.5 out of 5 stars"
+                                aria-label="4 out of 5 stars"
                             >
-                                ★★★★½
+                                ★★★★☆
+                            </span>
+
+                        </div>
+
+
+
+                        <!-- LIVE TMDB RATING -->
+
+                        <div class="external-rating">
+
+                            <span class="external-rating-label">
+                                TMDB Rating:
+                            </span>
+
+                            <span class="tmdb-rating">
+                                Loading...
                             </span>
 
                         </div>
@@ -396,6 +370,8 @@
 
                         <div class="tag-categories">
 
+
+                            <!-- TYPE -->
 
                             <div class="tag-category">
 
@@ -415,6 +391,8 @@
 
 
 
+                            <!-- STATUS -->
+
                             <div class="tag-category">
 
                                 <span class="tag-label">
@@ -433,6 +411,8 @@
 
 
 
+                            <!-- RELEASE YEAR FROM TMDB -->
+
                             <div class="tag-category">
 
                                 <span class="tag-label">
@@ -441,8 +421,8 @@
 
                                 <div class="tag-list">
 
-                                    <span class="tag">
-                                        2022
+                                    <span class="tag tmdb-year">
+                                        Loading...
                                     </span>
 
                                 </div>
@@ -451,20 +431,38 @@
 
 
 
+                            <!-- MATURITY RATING -->
+
+                            <div class="tag-category">
+
+                                <span class="tag-label">
+                                    Maturity
+                                </span>
+
+                                <div class="tag-list">
+
+                                    <span class="tag tmdb-certification">
+                                        Loading...
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+
+
+                            <!-- GENRES FROM TMDB -->
+
                             <div class="tag-category">
 
                                 <span class="tag-label">
                                     Genre
                                 </span>
 
-                                <div class="tag-list">
+                                <div class="tag-list genre-tags tmdb-genres">
 
                                     <span class="tag">
-                                        Superhero
-                                    </span>
-
-                                    <span class="tag">
-                                        Drama
+                                        Loading...
                                     </span>
 
                                 </div>
@@ -507,7 +505,9 @@
                 data-genre="baseball"
             >
 
-                <h3>Media Consumed</h3>
+                <h3>
+                    Media Consumed
+                </h3>
 
 
                 <div class="media-content">
@@ -516,10 +516,12 @@
                     <!-- IMAGE -->
 
                     <div class="media-image">
+
                         <img
-                            src="images/2026-10-15.jpg"
-                            alt="Milwaukee Brewers vs Los Angeles Dodgers"
-            >
+                            src="images/dodgers-brewers.jpg"
+                            alt="Milwaukee Brewers vs Los Angeles Dodgers NLCS Game 4"
+                        >
+
                     </div>
 
 
@@ -534,14 +536,12 @@
 
 
                         <p>
-                            Dodgers lose!!! and get swept!!! Honestly didnt catch all of the game but needed
-                            something to put as an example for the first day while building the website.
+                            Dodgers lose!!! and get swept!!! Honestly didnt catch all of the
+                            game but needed something to put as an example for the first day
+                            while building the website.
                         </p>
 
 
-
-                        <!-- RATING -->
-                        <!-- Add your star rating here when you decide on one -->
 
                         <div class="rating-section">
 
@@ -556,8 +556,6 @@
                         </div>
 
 
-
-                        <!-- TAGS -->
 
                         <div class="tag-categories">
 
@@ -622,7 +620,7 @@
                                     Genre
                                 </span>
 
-                                <div class="tag-list">
+                                <div class="tag-list genre-tags">
 
                                     <span class="tag">
                                         Baseball
@@ -640,6 +638,24 @@
                 </div>
 
             </article>
+
+        </section>
+
+
+
+        <!-- ====================================== -->
+        <!-- TMDB CREDIT                            -->
+        <!-- ====================================== -->
+
+        <section class="tmdb-credit">
+
+            <p>
+                Movie data and images provided by TMDB.
+            </p>
+
+            <p>
+                This product uses the TMDB API but is not endorsed or certified by TMDB.
+            </p>
 
         </section>
 

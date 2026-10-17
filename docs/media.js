@@ -460,7 +460,7 @@ async function loadSingleTmdbMovie(
     try {
 
         const requestUrl =
-            `${TMDB_PROXY_URL}?id=${encodeURIComponent(tmdbId)}`;
+            `${TMDB_PROXY_URL}?id=${encodeURIComponent(tmdbId)}&v=2-runtime`;
 
 
         const response =

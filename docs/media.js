@@ -1,3 +1,25 @@
+/* ========================================== */
+/* TMDB PROXY                                 */
+/* ========================================== */
+
+/*
+    IMPORTANT:
+
+    Replace this URL after you create your
+    Cloudflare Worker.
+
+    DO NOT put your TMDB token in this file.
+*/
+
+const TMDB_PROXY_URL =
+    "https://YOUR-WORKER-URL.workers.dev/movie";
+
+
+
+/* ========================================== */
+/* FILTER ELEMENTS                            */
+/* ========================================== */
+
 const yearFilter =
     document.getElementById("year-filter");
 
@@ -29,21 +51,575 @@ const filterClose =
 
 
 /* ========================================== */
-/* OPEN / CLOSE FILTER MENU                   */
+/* OPEN / CLOSE FILTERS                       */
 /* ========================================== */
 
-filterToggle.addEventListener("click", function () {
+filterToggle.addEventListener(
+    "click",
+    function () {
 
-    filterSection.classList.toggle("hidden");
+        filterSection.classList.toggle(
+            "hidden"
+        );
 
-});
+    }
+);
 
 
-filterClose.addEventListener("click", function () {
+filterClose.addEventListener(
+    "click",
+    function () {
 
-    filterSection.classList.add("hidden");
+        filterSection.classList.add(
+            "hidden"
+        );
 
-});
+    }
+);
+
+
+
+/* ========================================== */
+/* TEXT -> FILTER VALUE                       */
+/* ========================================== */
+
+function slugify(text) {
+
+    return text
+        .toLowerCase()
+        .trim()
+        .replace(/&/g, "and")
+        .replace(/[^a-z0-9]+/g, "-")
+        .replace(/^-|-$/g, "");
+
+}
+
+
+
+/* ========================================== */
+/* FORMAT NUMBERS                             */
+/* ========================================== */
+
+function formatNumber(number) {
+
+    return new Intl.NumberFormat(
+        "en-CA"
+    ).format(number);
+
+}
+
+
+
+/* ========================================== */
+/* ADD OPTION TO SELECT                       */
+/* ========================================== */
+
+function addSelectOption(
+    select,
+    value,
+    label
+) {
+
+    const alreadyExists =
+        Array.from(select.options)
+            .some(
+                option =>
+                    option.value === value
+            );
+
+
+    if (alreadyExists) {
+
+        return;
+
+    }
+
+
+    const option =
+        document.createElement("option");
+
+
+    option.value =
+        value;
+
+    option.textContent =
+        label;
+
+
+    select.appendChild(
+        option
+    );
+
+}
+
+
+
+/* ========================================== */
+/* REBUILD YEAR / GENRE FILTERS               */
+/* ========================================== */
+
+function rebuildDynamicFilters() {
+
+    const entries =
+        document.querySelectorAll(
+            ".media-entry"
+        );
+
+
+    const years =
+        new Set();
+
+
+    const genres =
+        new Map();
+
+
+
+    entries.forEach(function (entry) {
+
+        const releaseYear =
+            entry.dataset.release;
+
+
+        if (releaseYear) {
+
+            years.add(
+                releaseYear
+            );
+
+        }
+
+
+
+        const genreTags =
+            entry.querySelectorAll(
+                ".genre-tags .tag"
+            );
+
+
+        genreTags.forEach(function (tag) {
+
+            const label =
+                tag.textContent.trim();
+
+
+            if (!label) {
+
+                return;
+
+            }
+
+
+            const value =
+                slugify(label);
+
+
+            genres.set(
+                value,
+                label
+            );
+
+        });
+
+    });
+
+
+
+    /*
+        Preserve current choices while
+        rebuilding the option lists.
+    */
+
+    const currentRelease =
+        releaseFilter.value;
+
+    const currentGenre =
+        genreFilter.value;
+
+
+
+    releaseFilter.innerHTML =
+        '<option value="all">All</option>';
+
+
+    Array.from(years)
+        .sort(
+            (a, b) =>
+                Number(b) - Number(a)
+        )
+        .forEach(function (year) {
+
+            addSelectOption(
+                releaseFilter,
+                year,
+                year
+            );
+
+        });
+
+
+
+    genreFilter.innerHTML =
+        '<option value="all">All</option>';
+
+
+    Array.from(genres.entries())
+        .sort(
+            (a, b) =>
+                a[1].localeCompare(b[1])
+        )
+        .forEach(function (
+            [value, label]
+        ) {
+
+            addSelectOption(
+                genreFilter,
+                value,
+                label
+            );
+
+        });
+
+
+
+    if (
+        Array.from(releaseFilter.options)
+            .some(
+                option =>
+                    option.value === currentRelease
+            )
+    ) {
+
+        releaseFilter.value =
+            currentRelease;
+
+    }
+
+
+
+    if (
+        Array.from(genreFilter.options)
+            .some(
+                option =>
+                    option.value === currentGenre
+            )
+    ) {
+
+        genreFilter.value =
+            currentGenre;
+
+    }
+
+}
+
+
+
+/* ========================================== */
+/* LOAD TMDB MOVIES                           */
+/* ========================================== */
+
+async function loadTmdbMovieData() {
+
+    const movieEntries =
+        document.querySelectorAll(
+            '.media-entry[data-type="movie"][data-tmdb-id]'
+        );
+
+
+    const requests =
+        Array.from(movieEntries)
+            .map(
+                entry =>
+                    loadSingleTmdbMovie(entry)
+            );
+
+
+    await Promise.allSettled(
+        requests
+    );
+
+
+    rebuildDynamicFilters();
+
+    filterMedia();
+
+}
+
+
+
+/* ========================================== */
+/* LOAD ONE TMDB MOVIE                        */
+/* ========================================== */
+
+async function loadSingleTmdbMovie(
+    entry
+) {
+
+    const tmdbId =
+        entry.dataset.tmdbId;
+
+
+    const titleElement =
+        entry.querySelector(
+            ".tmdb-title"
+        );
+
+    const poster =
+        entry.querySelector(
+            ".tmdb-poster"
+        );
+
+    const posterPlaceholder =
+        entry.querySelector(
+            ".tmdb-image-placeholder"
+        );
+
+    const yearElement =
+        entry.querySelector(
+            ".tmdb-year"
+        );
+
+    const certificationElement =
+        entry.querySelector(
+            ".tmdb-certification"
+        );
+
+    const genreContainer =
+        entry.querySelector(
+            ".tmdb-genres"
+        );
+
+    const ratingElement =
+        entry.querySelector(
+            ".tmdb-rating"
+        );
+
+
+    try {
+
+        const requestUrl =
+            `${TMDB_PROXY_URL}?id=${encodeURIComponent(tmdbId)}`;
+
+
+        const response =
+            await fetch(
+                requestUrl
+            );
+
+
+        if (!response.ok) {
+
+            throw new Error(
+                `TMDB proxy returned ${response.status}`
+            );
+
+        }
+
+
+        const movie =
+            await response.json();
+
+
+
+        /* TITLE */
+
+        if (movie.title) {
+
+            titleElement.textContent =
+                movie.title;
+
+        }
+
+
+
+        /* POSTER */
+
+        if (movie.posterUrl) {
+
+            poster.src =
+                movie.posterUrl;
+
+            poster.alt =
+                `${movie.title} movie poster`;
+
+            poster.hidden =
+                false;
+
+            posterPlaceholder.hidden =
+                true;
+
+        } else {
+
+            posterPlaceholder.textContent =
+                "Poster unavailable";
+
+        }
+
+
+
+        /* RELEASE YEAR */
+
+        if (movie.releaseYear) {
+
+            yearElement.textContent =
+                movie.releaseYear;
+
+            entry.dataset.release =
+                String(
+                    movie.releaseYear
+                );
+
+        } else {
+
+            yearElement.textContent =
+                "Unknown";
+
+        }
+
+
+
+        /* MATURITY RATING */
+
+        if (movie.certification) {
+
+            certificationElement.textContent =
+                movie.certificationRegion
+                    ? `${movie.certification} (${movie.certificationRegion})`
+                    : movie.certification;
+
+        } else {
+
+            certificationElement.textContent =
+                "Not available";
+
+        }
+
+
+
+        /* TMDB COMMUNITY RATING */
+
+        if (
+            typeof movie.voteAverage === "number"
+        ) {
+
+            const roundedRating =
+                movie.voteAverage.toFixed(1);
+
+
+            const voteText =
+                movie.voteCount
+                    ? ` (${formatNumber(movie.voteCount)} votes)`
+                    : "";
+
+
+            ratingElement.textContent =
+                `${roundedRating} / 10${voteText}`;
+
+        } else {
+
+            ratingElement.textContent =
+                "Not available";
+
+        }
+
+
+
+        /* GENRES */
+
+        genreContainer.innerHTML =
+            "";
+
+
+        const genreValues =
+            [];
+
+
+        if (
+            Array.isArray(movie.genres) &&
+            movie.genres.length > 0
+        ) {
+
+            movie.genres.forEach(
+                function (genre) {
+
+                    const tag =
+                        document.createElement(
+                            "span"
+                        );
+
+
+                    tag.className =
+                        "tag";
+
+                    tag.textContent =
+                        genre;
+
+
+                    genreContainer.appendChild(
+                        tag
+                    );
+
+
+                    genreValues.push(
+                        slugify(genre)
+                    );
+
+                }
+            );
+
+
+            entry.dataset.genre =
+                genreValues.join(" ");
+
+        } else {
+
+            const tag =
+                document.createElement(
+                    "span"
+                );
+
+
+            tag.className =
+                "tag";
+
+            tag.textContent =
+                "Unknown";
+
+
+            genreContainer.appendChild(
+                tag
+            );
+
+        }
+
+    }
+
+    catch (error) {
+
+        console.error(
+            "Could not load TMDB movie:",
+            error
+        );
+
+
+        posterPlaceholder.textContent =
+            "Poster unavailable";
+
+        yearElement.textContent =
+            "Unavailable";
+
+        certificationElement.textContent =
+            "Unavailable";
+
+        genreContainer.innerHTML =
+            '<span class="tag">Unavailable</span>';
+
+        ratingElement.textContent =
+            "Unavailable";
+
+    }
+
+}
 
 
 
@@ -73,7 +649,9 @@ function filterMedia() {
 
 
     const days =
-        document.querySelectorAll(".day-entry");
+        document.querySelectorAll(
+            ".day-entry"
+        );
 
 
     days.forEach(function (day) {
@@ -95,83 +673,97 @@ function filterMedia() {
             selectedMonth === dayMonth;
 
 
-        let visibleMediaCount = 0;
+        let visibleMediaCount =
+            0;
 
 
         const mediaEntries =
-            day.querySelectorAll(".media-entry");
+            day.querySelectorAll(
+                ".media-entry"
+            );
 
 
-        mediaEntries.forEach(function (entry) {
+        mediaEntries.forEach(
+            function (entry) {
 
-            const type =
-                entry.dataset.type;
+                const type =
+                    entry.dataset.type;
 
-            const completion =
-                entry.dataset.completion;
+                const completion =
+                    entry.dataset.completion;
 
-            const release =
-                entry.dataset.release;
+                const release =
+                    entry.dataset.release;
 
-            const genre =
-                entry.dataset.genre || "";
-
-
-            const typeMatches =
-                selectedType === "all" ||
-                selectedType === type;
-
-
-            const completionMatches =
-                selectedCompletion === "all" ||
-                selectedCompletion === completion;
+                const genres =
+                    (
+                        entry.dataset.genre ||
+                        ""
+                    ).split(" ");
 
 
-            const releaseMatches =
-                selectedRelease === "all" ||
-                selectedRelease === release;
+                const typeMatches =
+                    selectedType === "all" ||
+                    selectedType === type;
 
 
-            const genreTags =
-                genre.split(" ");
+                const completionMatches =
+                    selectedCompletion === "all" ||
+                    selectedCompletion === completion;
 
 
-            const genreMatches =
-                selectedGenre === "all" ||
-                genreTags.includes(selectedGenre);
+                const releaseMatches =
+                    selectedRelease === "all" ||
+                    selectedRelease === release;
 
 
-            const shouldShow =
-                yearMatches &&
-                monthMatches &&
-                typeMatches &&
-                completionMatches &&
-                releaseMatches &&
-                genreMatches;
+                const genreMatches =
+                    selectedGenre === "all" ||
+                    genres.includes(
+                        selectedGenre
+                    );
 
 
-            if (shouldShow) {
+                const shouldShow =
+                    yearMatches &&
+                    monthMatches &&
+                    typeMatches &&
+                    completionMatches &&
+                    releaseMatches &&
+                    genreMatches;
 
-                entry.style.display = "";
 
-                visibleMediaCount++;
+                if (shouldShow) {
 
-            } else {
+                    entry.style.display =
+                        "";
 
-                entry.style.display = "none";
+                    visibleMediaCount++;
+
+                }
+
+                else {
+
+                    entry.style.display =
+                        "none";
+
+                }
 
             }
-
-        });
+        );
 
 
         if (visibleMediaCount > 0) {
 
-            day.style.display = "";
+            day.style.display =
+                "";
 
-        } else {
+        }
 
-            day.style.display = "none";
+        else {
+
+            day.style.display =
+                "none";
 
         }
 
@@ -182,7 +774,7 @@ function filterMedia() {
 
 
 /* ========================================== */
-/* WATCH FILTER CHANGES                       */
+/* FILTER EVENT LISTENERS                     */
 /* ========================================== */
 
 yearFilter.addEventListener(
@@ -214,3 +806,15 @@ genreFilter.addEventListener(
     "change",
     filterMedia
 );
+
+
+
+/* ========================================== */
+/* INITIAL PAGE LOAD                          */
+/* ========================================== */
+
+rebuildDynamicFilters();
+
+filterMedia();
+
+loadTmdbMovieData();

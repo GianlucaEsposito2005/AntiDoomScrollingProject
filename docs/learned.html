@@ -1,39 +1,444 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Learned</title>
+
     <link rel="stylesheet" href="styles.css">
 </head>
 
+
 <body>
 
+    <!-- NAVIGATION -->
     <header>
+
         <nav>
             <a href="index.html">Statement</a>
             <a href="media.html">Media</a>
             <a href="learned.html" class="active">Learned</a>
         </nav>
+
     </header>
 
+
     <main>
+
         <h1>Learned</h1>
 
-        <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-            Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
-            nisi ut aliquip ex ea commodo consequat.
-        </p>
 
-        <p>
-            Duis aute irure dolor in reprehenderit in voluptate velit esse
-            cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-            cupidatat non proident, sunt in culpa qui officia deserunt mollit
-            anim id est laborum.
-        </p>
+        <!-- ====================================== -->
+        <!-- YEAR / MONTH                           -->
+        <!-- ====================================== -->
+
+        <div class="archive-selector">
+
+            <div>
+
+                <label for="learned-year-filter">
+                    Year
+                </label>
+
+                <select id="learned-year-filter">
+
+                    <option value="all">
+                        All
+                    </option>
+
+                    <option value="2026">
+                        2026
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <div>
+
+                <label for="learned-month-filter">
+                    Month
+                </label>
+
+                <select id="learned-month-filter">
+
+                    <option value="all">
+                        All
+                    </option>
+
+                    <option value="october">
+                        October
+                    </option>
+
+                </select>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- ====================================== -->
+        <!-- FILTER BUTTON                          -->
+        <!-- ====================================== -->
+
+        <button
+            id="learned-filter-toggle"
+            class="filter-toggle"
+            type="button"
+        >
+            Filters
+        </button>
+
+
+
+        <!-- ====================================== -->
+        <!-- FILTER MENU                            -->
+        <!-- ====================================== -->
+
+        <section
+            id="learned-filter-section"
+            class="filter-section hidden"
+        >
+
+            <div class="filter-header">
+
+                <h2>
+                    Filter Learned
+                </h2>
+
+                <button
+                    id="learned-filter-close"
+                    class="filter-close"
+                    type="button"
+                >
+                    Close
+                </button>
+
+            </div>
+
+
+            <div class="learned-filter-grid">
+
+
+                <!-- CATEGORY -->
+
+                <div class="filter-group">
+
+                    <label for="category-filter">
+                        Category
+                    </label>
+
+                    <select id="category-filter">
+
+                        <option value="all">
+                            All
+                        </option>
+
+                        <option value="science">
+                            Science
+                        </option>
+
+                        <option value="technology">
+                            Technology
+                        </option>
+
+                        <option value="history">
+                            History
+                        </option>
+
+                        <option value="geography">
+                            Geography
+                        </option>
+
+                        <option value="culture">
+                            Culture
+                        </option>
+
+                        <option value="sports">
+                            Sports
+                        </option>
+
+                        <option value="economics">
+                            Economics
+                        </option>
+
+                        <option value="language">
+                            Language
+                        </option>
+
+                        <option value="other">
+                            Other
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+
+                <!-- SOURCE / TYPE -->
+
+                <div class="filter-group">
+
+                    <label for="learning-type-filter">
+                        Learned From
+                    </label>
+
+                    <select id="learning-type-filter">
+
+                        <option value="all">
+                            All
+                        </option>
+
+                        <option value="article">
+                            Article
+                        </option>
+
+                        <option value="video">
+                            Video
+                        </option>
+
+                        <option value="book">
+                            Book
+                        </option>
+
+                        <option value="podcast">
+                            Podcast
+                        </option>
+
+                        <option value="conversation">
+                            Conversation
+                        </option>
+
+                        <option value="research">
+                            Personal Research
+                        </option>
+
+                        <option value="other">
+                            Other
+                        </option>
+
+                    </select>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- ====================================== -->
+        <!-- OCTOBER 16                             -->
+        <!-- ====================================== -->
+
+        <section
+            class="learned-day-entry"
+            data-year="2026"
+            data-month="october"
+        >
+
+            <h2>
+                Friday, October 16, 2026
+            </h2>
+
+
+            <article
+                class="learned-entry"
+                data-category="science"
+                data-learning-type="article"
+            >
+
+                <h3>
+                    Title of What I Learned
+                </h3>
+
+
+                <div class="learned-text-section">
+
+                    <h4>
+                        Description
+                    </h4>
+
+                    <p>
+                        Write what you learned here. This section should explain
+                        the actual fact, concept, idea, or piece of information.
+                    </p>
+
+                </div>
+
+
+                <div class="learned-text-section">
+
+                    <h4>
+                        Comment
+                    </h4>
+
+                    <p>
+                        Write your own thoughts here. You could explain why you
+                        found it interesting, what surprised you, or what you
+                        want to learn more about.
+                    </p>
+
+                </div>
+
+
+
+                <!-- TAGS -->
+
+                <div class="tag-categories">
+
+
+                    <div class="tag-category">
+
+                        <span class="tag-label">
+                            Category
+                        </span>
+
+                        <div class="tag-list">
+
+                            <span class="tag">
+                                Science
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="tag-category">
+
+                        <span class="tag-label">
+                            Source
+                        </span>
+
+                        <div class="tag-list">
+
+                            <span class="tag">
+                                Article
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+            </article>
+
+        </section>
+
+
+
+        <!-- ====================================== -->
+        <!-- OCTOBER 15                             -->
+        <!-- ====================================== -->
+
+        <section
+            class="learned-day-entry"
+            data-year="2026"
+            data-month="october"
+        >
+
+            <h2>
+                Thursday, October 15, 2026
+            </h2>
+
+
+            <article
+                class="learned-entry"
+                data-category="history"
+                data-learning-type="video"
+            >
+
+                <h3>
+                    Example Historical Fact
+                </h3>
+
+
+                <div class="learned-text-section">
+
+                    <h4>
+                        Description
+                    </h4>
+
+                    <p>
+                        Replace this text with a description of what you learned.
+                    </p>
+
+                </div>
+
+
+                <div class="learned-text-section">
+
+                    <h4>
+                        Comment
+                    </h4>
+
+                    <p>
+                        Replace this with your personal comment or reaction.
+                    </p>
+
+                </div>
+
+
+
+                <!-- TAGS -->
+
+                <div class="tag-categories">
+
+
+                    <div class="tag-category">
+
+                        <span class="tag-label">
+                            Category
+                        </span>
+
+                        <div class="tag-list">
+
+                            <span class="tag">
+                                History
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="tag-category">
+
+                        <span class="tag-label">
+                            Source
+                        </span>
+
+                        <div class="tag-list">
+
+                            <span class="tag">
+                                Video
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+            </article>
+
+        </section>
+
+
     </main>
 
+
+    <script src="learned.js"></script>
+
 </body>
+
 </html>
